@@ -3,7 +3,7 @@
 Letcode Probelms  - Deadline - Difficulty
 Hi my dear friends. I am very happy to invite you to our leecoder group. Below is the problems we do every day, hope you enjoy youself.
 
-[Source Code](https://github.com/wuinyu/ThinkInJava/blob/master/src/main/java/com/smilingsome/leetcode/MySolution.java) 
+[Source Code](https://github.com/wuinyu/JavaStudy/blob/master/src/main/java/com/smilingsome/leetcode/MySolution.java) 
 
 [1. Two sum](https://leetcode.com/problems/two-sum/) - 20160411 - Easy
 
