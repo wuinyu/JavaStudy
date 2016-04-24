@@ -2,6 +2,7 @@ package com.smilingsome.leetcode;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.Map;
 
 public class MySolution {
 	/**
@@ -179,9 +180,15 @@ public class MySolution {
 		return prefix;
 	}
 	
+	/**
+	 * 
+	 * <p>寻找一个字符串数组的最长公共前缀</p>
+	 * @param strs
+	 * @return
+	 */
     public String longestCommonPrefix(String[] strs) {
-//    	if(strs.length == 0)
-//    		return "";
+    	if(strs.length == 0)
+    		return "";
     	int index = 0;
     	// 找出最短字符串的长度
     	int minLength = Integer.MAX_VALUE;
@@ -202,6 +209,155 @@ public class MySolution {
         return strs[0].substring(0, index);
     }
     
+    /**
+     * 
+     * <p>Description: TODO(这里用一句话描述这个方法的作用)</p>
+     * @param s
+     * @return
+     */
+    public int romanToInt(String s) {
+    	int result = 0;
+    	Map<Character, Integer> romanMap = new HashMap<>();
+    	romanMap.put('I', 1);
+    	romanMap.put('V', 5);
+    	romanMap.put('X', 10);
+    	romanMap.put('L', 50);
+    	romanMap.put('C', 100);
+    	romanMap.put('D', 500);
+    	romanMap.put('M', 1000);
+    	
+    	for(int i = 0; i < s.length() - 1; i++){
+    		int left = romanMap.get(s.charAt(i));
+    		int right = romanMap.get(s.charAt(i+1));
+    		if( left >= right )
+    			result += left;
+    		else
+    			result -= left;
+    	}
+    	result += romanMap.get(s.charAt(s.length() - 1));
+        return result;
+    }
+    
+    /**
+     * 
+     * <p>十进制数转换成罗马数字</p>
+     * <p></p>
+     * @param num
+     * @return romanString
+     */
+    public String intToRoman(int num){
+
+    	StringBuilder roman = new StringBuilder();
+    	roman.append(c[3][num / 1000 % 10]);
+    	roman.append(c[2][num / 100 % 10]);
+    	roman.append(c[1][num / 10 % 10]);
+    	roman.append(c[0][num % 10]);
+    	return roman.toString();
+    }
+    
+	/**
+	 * 
+	 * You are given two linked lists representing two non-negative numbers. The
+	 * digits are stored in reverse order and each of their nodes contain a
+	 * single digit. Add the two numbers and return it as a linked list. Input:
+	 * (2 -> 4 -> 3) + (5 -> 6 -> 4) Output: 7 -> 0 -> 8 含义: 342 + 465 = 807
+	 * ListNode 是单链表数据结构
+	 * 
+	 * @param l1
+	 * @param l2
+	 * @return newHead.next
+	 */
+	public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+		int carry = 0;
+
+		ListNode newHead = new ListNode(0);
+		ListNode p1 = l1, p2 = l2, p3 = newHead;
+
+		while (p1 != null || p2 != null) {
+			if (p1 != null) {
+				carry += p1.val;
+				p1 = p1.next;
+			}
+
+			if (p2 != null) {
+				carry += p2.val;
+				p2 = p2.next;
+			}
+
+			p3.next = new ListNode(carry % 10);
+			p3 = p3.next;
+			carry /= 10;
+		}
+
+		if (carry == 1)
+			p3.next = new ListNode(1);
+
+		return newHead.next;
+	}
+	
+	/**
+	 * 
+	 * <p>Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.a</p>
+	 * @param l1
+	 * @param l2
+	 * @return l
+	 */
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode l = new ListNode(0);
+        ListNode p1 = l1, p2 = l2, p = l;
+        while(p1 != null && p2 != null){
+        	if(p1.val <= p2.val){
+        		p.next = p1;
+        		p1 = p1.next;
+        		p = p.next;
+        	}else{
+        		p.next = p2;
+        		p2 = p2.next;
+        		p = p.next;
+        	}	
+        }
+    	if(p1 != null)
+    		p.next = p1;
+    	if(p2 != null)
+    		p.next = p2;      
+        return l.next;
+    }
+    
+    public void printListNode(ListNode l){
+    	ListNode p = l;
+    	while(p != null){
+    		if(p == l)
+    			System.out.print(p.val);
+    		else
+    			System.out.print(" -> " + p.val);
+    		p = p.next;
+    	}
+    	System.out.println();
+    }
+    
+    public ListNode buildListNode(int[] source){
+    	if(source.length == 0)
+    		return null;
+    	ListNode l = new ListNode(0);
+    	ListNode p = l;
+    	for(int val : source){
+    		ListNode node = new ListNode(val);
+    		p.next = node;
+    		p = p.next;
+    	}
+    	return l.next;
+    }
+    /**
+     * Given a string, find the length of the longest substring without repeating characters.
+     * @param s
+     * @return
+     */
+    public int lengthOfLongestSubstring(String s) {
+        int length = 0;
+        // 滑动窗口 HashMap HashSet 
+        return length;
+    }
+    
 	public static void main(String[] args) {
 		System.out.println(new MySolution().reverse(2147483647));
 		System.out.println((2e31 - 1) == 2147483647);
@@ -212,4 +368,11 @@ public class MySolution {
 		// System.out.println(new MySolution().inverse_sum(100000));
 	}
 
+    private String c[][]= {
+    		{"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"},
+    		{"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"},
+    		{"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"},
+    		{"", "M", "MM", "MMM"},
+    		
+    };
 }
