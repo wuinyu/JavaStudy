@@ -66,6 +66,7 @@ public class TestMySolution {
 	public void testlongestPalindrome(){
 		MySolution solution = new MySolution();
 		assertEquals(solution.longestPalindrome(""), "");
+		assertEquals(solution.longestPalindrome(""), "");
 		assertEquals(solution.longestPalindrome("aba"), "aba");
 		assertEquals(solution.longestPalindrome("abba"), "abba");
 		assertEquals(solution.longestPalindrome("abcbdadba"), "bdadb");

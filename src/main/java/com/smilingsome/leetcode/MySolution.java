@@ -439,6 +439,7 @@ public class MySolution {
 	 * 
 	 * @param s
 	 * @return substring
+	 * 
 	 */
 	public String longestPalindrome(String s) {
 		int start = 0, end = 0, max = 1;
