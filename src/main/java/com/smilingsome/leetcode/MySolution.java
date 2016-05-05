@@ -429,11 +429,15 @@ public class MySolution {
 	}
 
 	/**
-	 * <p>最长回文字符串</p> 
-	 * Given a string S, find the longest palindromic substring in S.
-	 * You may assume that the maximum length of S is 1000, and there exists one
-	 * unique longest palindromic substring. 
-	 * <p>动态规划实现算法:</p>
+	 * <p>
+	 * 最长回文字符串
+	 * </p>
+	 * Given a string S, find the longest palindromic substring in S. You may
+	 * assume that the maximum length of S is 1000, and there exists one unique
+	 * longest palindromic substring.
+	 * <p>
+	 * 动态规划实现算法:
+	 * </p>
 	 * 用flag[i][j]来记录从s的i位置到j位置是不是回文串 1. 初始化: (i >= j) flag[i][j] = true; 2. 计算:
 	 * if s[i] == s[j] then flag[i][j] = flag[i+1][j-1] else flag[i][j] = false;
 	 * 
@@ -469,72 +473,104 @@ public class MySolution {
 
 		return s.substring(start, end + 1 > s.length() ? s.length() : end + 1);
 	}
+
 	/**
 	 * 
-	 * Implement strStr().
-	 * 	Returns the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+	 * Implement strStr(). Returns the index of the first occurrence of needle
+	 * in haystack, or -1 if needle is not part of haystack.
+	 * 
 	 * @param haystack
 	 * @param needle
 	 * @return
 	 */
-    public int strStr(String haystack, String needle) {
-    	// Java的indexOf方法 相当于C++的strStr方法
-        return haystack.indexOf(needle); 
-    }
-    /**
-     * <p>Maximum Subarray</p>
-     * Find the contiguous subarray within an array (containing at least one number) which has the largest sum.
-     * For example, given the array [−2,1,−3,4,−1,2,1,−5,4],
-     * the contiguous subarray [4,−1,2,1] has the largest sum = 6.
-     * <p>More practice:</p>
-     * If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach, which is more subtle.
-     * @param nums
-     * @return
-     */
-    public int maxSubArray(int[] nums) {
-    	if(nums.length == 0)
-    		return 0;
-    	// flag标记是否数组全部为负数
-    	boolean flag = true;
-    	
-    	int maxSum = 0; 
-    	int tempSum = 0;
-    	// 记下最大值
-    	int maxNum = Integer.MIN_VALUE; 
-    	for(int i = 0; i < nums.length; i++){
-    		if(maxNum < nums[i])
-    			maxNum = nums[i];
-    		tempSum += nums[i];
-    		if(tempSum < 0)
-    			tempSum = 0;
-    		else if(maxSum < tempSum){
-    			flag = false;
-    			maxSum = tempSum;
-    		}
-    	}
-    	if(flag)
-    		return maxNum;
-    	else
-    		return maxSum;
-    }
+	public int strStr(String haystack, String needle) {
+		// Java的indexOf方法 相当于C++的strStr方法
+		return haystack.indexOf(needle);
+	}
 
-    public ListNode swapPairs(ListNode head) {
+	/**
+	 * <p>
+	 * Maximum Subarray
+	 * </p>
+	 * Find the contiguous subarray within an array (containing at least one
+	 * number) which has the largest sum. For example, given the array
+	 * [−2,1,−3,4,−1,2,1,−5,4], the contiguous subarray [4,−1,2,1] has the
+	 * largest sum = 6.
+	 * <p>
+	 * More practice:
+	 * </p>
+	 * If you have figured out the O(n) solution, try coding another solution
+	 * using the divide and conquer approach, which is more subtle.
+	 * 
+	 * @param nums
+	 * @return
+	 */
+	public int maxSubArray(int[] nums) {
+		if (nums.length == 0)
+			return 0;
+		// flag标记是否数组全部为负数
+		boolean flag = true;
+
+		int maxSum = 0;
+		int tempSum = 0;
+		// 记下最大值
+		int maxNum = Integer.MIN_VALUE;
+		for (int i = 0; i < nums.length; i++) {
+			if (maxNum < nums[i])
+				maxNum = nums[i];
+			tempSum += nums[i];
+			if (tempSum < 0)
+				tempSum = 0;
+			else if (maxSum < tempSum) {
+				flag = false;
+				maxSum = tempSum;
+			}
+		}
+		if (flag)
+			return maxNum;
+		else
+			return maxSum;
+	}
+
+	public ListNode swapPairs(ListNode head) {
 		ListNode p = head;
-				
+
 		int i = 0;
 		while (p != null) {
 			// 获得当前节点p的下一个节点q
 			ListNode q = p.next;
 			// 如果q节点不为空，交换p和q
-			if(q != null){
+			if (q != null) {
 				p.next = q.next;
 				q.next = p;
 			}
 			p = p.next;
 		}
 		return head;
-    }
-    
+	}
+
+	/**
+	 * 
+	 * '.' Matches any single character. '*' Matches zero or more of the
+	 * preceding element.
+	 * 
+	 * The matching should cover the entire input string (not partial).
+	 * 
+	 * The function prototype should be: bool isMatch(const char *s, const char
+	 * *p)
+	 * 
+	 * Some examples: isMatch("aa","a") → false isMatch("aa","aa") → true
+	 * isMatch("aaa","aa") → false isMatch("aa", "a*") → true isMatch("aa",
+	 * ".*") → true isMatch("ab", ".*") → true isMatch("aab", "c*a*b") → true
+	 */
+	public boolean isMatch(String s, String p) {
+		// 如果两个字符串相等，直接返回
+		if(s.equals(p))
+			return true;
+		else
+			return false;
+	}
+
 	public static void main(String[] args) {
 		System.out.println(new MySolution().reverse(2147483647));
 		System.out.println((2e31 - 1) == 2147483647);
