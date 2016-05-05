@@ -517,6 +517,23 @@ public class MySolution {
     	else
     		return maxSum;
     }
+
+    public ListNode swapPairs(ListNode head) {
+		ListNode p = head;
+				
+		int i = 0;
+		while (p != null) {
+			// 获得当前节点p的下一个节点q
+			ListNode q = p.next;
+			// 如果q节点不为空，交换p和q
+			if(q != null){
+				p.next = q.next;
+				q.next = p;
+			}
+			p = p.next;
+		}
+		return head;
+    }
     
 	public static void main(String[] args) {
 		System.out.println(new MySolution().reverse(2147483647));

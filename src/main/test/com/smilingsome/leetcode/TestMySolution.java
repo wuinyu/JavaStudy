@@ -88,4 +88,14 @@ public class TestMySolution {
 		assertEquals(solution.maxSubArray(new int[]{}), 0);
 		assertEquals(solution.maxSubArray(new int[]{-2, -1, -3}), -1);
 	}
+	
+	@Test
+	public void testswapPairs(){
+		MySolution solution = new MySolution();
+		solution.printListNode(solution.swapPairs(null));
+		solution.printListNode(solution.swapPairs(new ListNode(0)));
+		solution.printListNode(solution.swapPairs(solution.buildListNode(new int[]{1, 2, 3})));
+		solution.printListNode(solution.swapPairs(solution.buildListNode(new int[]{1, 2, 3, 4})));
+		solution.printListNode(solution.swapPairs(solution.buildListNode(new int[]{1}) ));
+	}
 }
