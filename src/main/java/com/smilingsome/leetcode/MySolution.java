@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 public class MySolution {
 	/**
@@ -532,21 +533,36 @@ public class MySolution {
 			return maxSum;
 	}
 
+	/**
+	 * Given a linked list, swap every two adjacent nodes and return its head.
+	 * 
+	 * For example, Given 1->2->3->4, you should return the list as 2->1->4->3.
+	 * 
+	 * Your algorithm should use only constant space. You may not modify the
+	 * values in the list, only nodes itself can be changed.
+	 * 
+	 * Subscribe to see which companies asked this question
+	 * 
+	 * @param head
+	 * @return
+	 */
 	public ListNode swapPairs(ListNode head) {
-		ListNode p = head;
+		ListNode l1 = new ListNode(0);
+		l1.next = head;
+		head = l1;
+		ListNode l2 = l1.next;
 
-		int i = 0;
-		while (p != null) {
-			// 获得当前节点p的下一个节点q
-			ListNode q = p.next;
-			// 如果q节点不为空，交换p和q
-			if (q != null) {
-				p.next = q.next;
-				q.next = p;
+		while (l2 != null) {
+			ListNode l3 = l2.next;
+			if (l3 != null) {
+				l1.next = l3;
+				l2.next = l3.next;
+				l3.next = l2;
 			}
-			p = p.next;
+			l1 = l2;
+			l2 = l2.next;
 		}
-		return head;
+		return head.next;
 	}
 
 	/**
@@ -565,10 +581,158 @@ public class MySolution {
 	 */
 	public boolean isMatch(String s, String p) {
 		// 如果两个字符串相等，直接返回
-		if(s.equals(p))
+		if (s.equals(p))
 			return true;
 		else
 			return false;
+	}
+
+	/**
+	 * Given a linked list, remove the nth node from the end of list and return
+	 * its head.
+	 * 
+	 * For example,
+	 * 
+	 * Given linked list: 1->2->3->4->5, and n = 2.
+	 * 
+	 * After removing the second node from the end, the linked list becomes
+	 * 1->2->3->5. Note: Given n will always be valid. Try to do this in one
+	 * pass. 一次遍历， 假设给定的参数n永远合法 求解失败
+	 * 
+	 * @param head
+	 * @param n
+	 * @return
+	 */
+	public ListNode removeNthFromEnd(ListNode head, int n) {
+		// 如果单链表为空，返回null
+		if (head == null || n <= 0)
+			return head;
+		ListNode p = head;
+		ListNode q = p;
+		for (; (n > 0) && (q != null); n--) {
+			q = q.next;
+		}
+
+		if (n == 1 || (n == 0 && q == null))
+			return head.next;
+
+		while (q != null) {
+			if (q.next == null) {
+				ListNode r = p.next;
+				p.next = r.next;
+				r.next = null;
+				r = null;
+			}
+			p = p.next;
+			q = q.next;
+		}
+
+		return head;
+	}
+
+	/**
+	 * Given a string containing just the characters '(', ')', '{', '}', '[' and
+	 * ']', determine if the input string is valid. 字符串只会包含 '(', ')', '{', '}',
+	 * '[' and ']' 这样的符号 The brackets must close in the correct order, "()" and
+	 * "()[]{}" are all valid but "(]" and "([)]" are not. 采用栈结构判断 是否所有括号正确关闭
+	 * Subscribe to see which companies asked this question
+	 * 
+	 * @param s
+	 * @return
+	 */
+	public boolean isValid(String s) {
+		if (s.length() == 0 || s == null)
+			return true;
+		Stack<Character> stack = new Stack<>();
+		for (int i = 0; i < s.length(); i++) {
+			char digit = s.charAt(i);
+			if (digit == '(' || digit == '{' || digit == '[')
+				stack.push(digit);
+			else {
+				switch (digit) {
+				case ')':
+					if (stack.empty() || stack.pop() != '(')
+						return false;
+					break;
+				case '}':
+					if (stack.empty() || stack.pop() != '{')
+						return false;
+					break;
+				case ']':
+					if (stack.empty() || stack.pop() != '[')
+						return false;
+					break;
+				default:
+					break;
+				}
+			}
+		}
+		return stack.empty();
+	}
+
+	/**
+	 * Determine whether an integer is a palindrome. Do this without extra
+	 * space. 判断一个整数是否为回文数，不能占用额外的空间 click to show spoilers.
+	 * 
+	 * Some hints: Could negative integers be palindromes? (ie, -1) 负数显然不是回文数 If
+	 * you are thinking of converting the integer to string, note the
+	 * restriction of using extra space.
+	 * 
+	 * You could also try reversing an integer. However, if you have solved the
+	 * problem "Reverse Integer", you know that the reversed integer might
+	 * overflow. How would you handle such case?
+	 * 
+	 * There is a more generic way of solving this problem. 没有解决
+	 * 
+	 * @param x
+	 * @return
+	 */
+	public boolean isPalindrome(int x) {
+		// 负数一定不是回文数
+		if (x < 0)
+			return false;
+		// 小于10的正整数一定是回文数
+		if (x < 10)
+			return true;
+
+		int left = x, right = 0;
+		while (left > right) {
+			right = right * 10;
+			right += left % 10;
+			left = left / 10;
+		}
+		// 如果x是10的幂，返回false
+		return (left == right || (left == (right / 10) && left != 0));
+	}
+
+	/**
+	 * Divide two integers without using multiplication, division and mod
+	 * operator. 不能用 乘除取模 运算符 If it is overflow, return MAX_INT.
+	 * 
+	 * @param dividend
+	 * @param divisor
+	 * @return
+	 */
+	public int divide(int dividend, int divisor) {
+		return Integer.MAX_VALUE;
+	}
+
+	/**
+	 * Given n non-negative integers a1, a2, ..., an, where each represents a
+	 * point at coordinate (i, ai). n vertical lines are drawn such that the two
+	 * endpoints of line i is at (i, ai) and (i, 0). Find two lines, which
+	 * together with x-axis forms a container, such that the container contains
+	 * the most water.
+	 * 
+	 * Note: You may not slant the container.
+	 * 不允许倾斜容器
+	 * 
+	 * @param height
+	 * @return
+	 */
+	public int maxArea(int[] height) {
+		return 0;
+
 	}
 
 	public static void main(String[] args) {

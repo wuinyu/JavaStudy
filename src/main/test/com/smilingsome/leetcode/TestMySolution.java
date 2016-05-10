@@ -95,7 +95,48 @@ public class TestMySolution {
 		solution.printListNode(solution.swapPairs(null));
 		solution.printListNode(solution.swapPairs(new ListNode(0)));
 		solution.printListNode(solution.swapPairs(solution.buildListNode(new int[]{1, 2, 3})));
+		solution.printListNode(solution.swapPairs(solution.buildListNode(new int[]{1, 2, 3, 4, 5})));
 		solution.printListNode(solution.swapPairs(solution.buildListNode(new int[]{1, 2, 3, 4})));
 		solution.printListNode(solution.swapPairs(solution.buildListNode(new int[]{1}) ));
+	}
+	
+	@Test
+	@Ignore("Deprecated")
+	public void testremoveNthFromEnd(){
+		MySolution solution = new MySolution();
+		
+		solution.printListNode(solution.removeNthFromEnd(new ListNode(0), 1));
+		solution.printListNode(solution.removeNthFromEnd(solution.buildListNode(new int[]{1, 2, 3}), 2));
+		solution.printListNode(solution.removeNthFromEnd(solution.buildListNode(new int[]{1, 2, 3}), 4));
+	}
+	
+	@Test
+	public void testisValid(){
+		MySolution solution = new MySolution();
+		assertTrue(solution.isValid(""));
+		assertFalse(solution.isValid("]"));
+		assertTrue(solution.isValid("()"));
+		assertTrue(solution.isValid("([]){}"));
+		assertFalse(solution.isValid("([)"));
+		assertFalse(solution.isValid("(])"));
+		assertFalse(solution.isValid("([)]"));
+	}
+	
+	@Test
+	public void testIsPalindrome(){
+		MySolution solution = new MySolution();
+		assertTrue(solution.isPalindrome(1));
+		assertTrue(solution.isPalindrome(0));
+		
+		assertTrue(solution.isPalindrome(101));
+		assertTrue(solution.isPalindrome(1221));
+		assertTrue(solution.isPalindrome(1001));
+		
+		assertFalse(solution.isPalindrome(-1));
+		assertFalse(solution.isPalindrome(100));
+		assertFalse(solution.isPalindrome(500));
+		assertFalse(solution.isPalindrome(13100));
+		assertFalse(solution.isPalindrome(123421));
+		
 	}
 }

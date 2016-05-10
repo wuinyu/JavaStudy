@@ -47,6 +47,15 @@ Hi my dear friends. I am very happy to invite you to our leecoder group. Below i
 
 [29. Divide Two Integers](https://leetcode.com/problems/divide-two-integers/) - Medium
 
+4 Week - 20160511
+[85. Maximal Rectangle](https://leetcode.com/problems/maximal-rectangle/) - Hard
+
+[225. Implement Stack using Queues](https://leetcode.com/problems/implement-stack-using-queues/) - Easy
+
+[232. Implement Queue using Stacks](https://leetcode.com/problems/implement-queue-using-stacks/) - Easy
+
+[155. Min Stack](https://leetcode.com/problems/min-stack/) - Easy
+
 
 ---
 >Wyatt
